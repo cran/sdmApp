@@ -8,7 +8,6 @@
 #' @return A map showing folds and the species data, that can be used to explore folds.
 #' @export
 #'
-#' @seealso \code{\link{foldExplorer}}
 #'
 #' @import raster
 #'
@@ -21,8 +20,8 @@
 #' @import blockCV
 #'
 #' @importFrom graphics plot
-#'@importFrom ggpubr ggarrange
 #' @examples
+#' \dontrun{
 #' # load blockCV package data
 #' library(blockCV)
 #' awt <- raster::brick(system.file("extdata", "awt.grd", package = "blockCV"))
@@ -35,6 +34,7 @@
 #' rasterLayer = awt,theRange = 70000,k = 5,
 #' selection = "random",iteration = 100)
 #' sdmApp_fold_Explorer(sb,awt,pa_data,1)
+#'}
 sdmApp_fold_Explorer<-function (blocks, rasterLayer, speciesData, num) {
   if (is.null(rasterLayer)) {
     stop("A raster layer should be provided")
@@ -124,5 +124,5 @@ sdmApp_fold_Explorer<-function (blocks, rasterLayer, speciesData, num) {
         ggplot2::ggtitle("Testing set") + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5, size = 10))
     }
   }
-  ggpubr::ggarrange(ptr, pts,common.legend = TRUE)
+  cowplot::plot_grid(ptr, pts)
 }

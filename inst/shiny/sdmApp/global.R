@@ -8,7 +8,6 @@ library(data.table)
 library(sf) # classes and functions for vector data
 library(raster)# classes and functions for raster data
 library(ggplot2)
-library(biomod2)
 library(dismo)
 library(DT)
 library(readxl)
@@ -18,16 +17,16 @@ library(SSDM)
 library(automap)
 library(ggcorrplot)
 library(blockCV)
-library(tidyverse)
-library(ggpubr)
-library(CENFA)
+#library(tidyverse)
+#library(ggpubr)
+library(cowplot)
+#library(CENFA)
 library(randomForest)
 library(kernlab)
 library(dplyr)
 library(sp)
 library(rJava)
-#library(raster)
-
+library(stringr)
 if (!getShinyOption("sdmAppInvoked", FALSE)) {### Beginning required code for deployment
   .startdir <- .guitheme <- .guijsfile <- NULL
   # maxRequestSize <- 50
@@ -72,7 +71,7 @@ Specdata_Presence<-reactive({
 })
 
 glc<-reactive({
-  GLcenfa(x = data$Env)
+  CENFA::GLcenfa(x = data$Env)
 })
 
 mod.enfa<-reactive({
